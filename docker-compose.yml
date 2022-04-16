@@ -5,20 +5,26 @@ services:
     restart: always
     container_name: back
     
-    build: ./backend/Dockerfile
-    command : "python ./app/api/manage.py runserver localhost:8000"
-    
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    command : "python manage.py runserver localhost:8000"
     ports:  
       - "8000:8000"
-    depends_on: 
+    volumes:
+      - .:/app/api/
+    depends_on:
       - db
       - frontend
 
   frontend:
     restart: always
     container_name: front
-    
-    build: ./frontend/Dockerfile
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    volumes:
+      - .:/app/frontend/
     command : npm start
     ports:
       - "3000:3000"
