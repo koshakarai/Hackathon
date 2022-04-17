@@ -8,7 +8,7 @@ services:
     build:
       context: .
       dockerfile: backend/Dockerfile
-    command : "python backend/manage.py runserver localhost:8000"
+    command : "python backend/manage.py runserver 0.0.0.0:8000"
     ports:  
       - "8000:8000"
     volumes:
