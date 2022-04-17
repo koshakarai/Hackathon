@@ -32,12 +32,13 @@ services:
   db:
     image: mysql:5.7
     ports:
-      - '3307:3306'
+      - '3307:3307'
     environment:
-      MYSQL_DATABASE: 'db_django'
-      MYSQL_USER: 'hackaton'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
+      MYSQL_DATABASE: 'django_db'
+      MYSQL_USER: 'django_db'
+      MYSQL_PASSWORD: 'django'
+      MYSQL_ROOT_PASSWORD: 'root'
+      MYSQL_TCP_PORT: 3307
     restart: always
 
 
