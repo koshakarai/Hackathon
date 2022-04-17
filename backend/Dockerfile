@@ -8,4 +8,4 @@ RUN apt-get install libgeos-dev -y
 COPY ../backend ./app/api/
 RUN pip install --upgrade pip && pip install -r app/api/requirements.txt
 
-
+#Так долнго ставится фронт. Что бы без фронта обновить билд:  docker-compose build --no-cache backend потом в readme запишу)
