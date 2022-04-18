@@ -12,7 +12,8 @@ def test_api(request):
         data = [{"id":0, "name":"Akay"},
         {"id":1, "name":"Ararat"},
         {"id":2, "name":"Maxim"},
-        {"id":3, "name":"Roman"}] 
+        {"id":3, "name":"Roman"}
+                ]
 
         return Response(data)
 
