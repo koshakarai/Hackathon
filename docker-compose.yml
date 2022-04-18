@@ -25,6 +25,8 @@ services:
       dockerfile: frontend/Dockerfile
     volumes:
       - .:/app/api/frontend
+    environment:
+      - CHOKIDAR_USEPOLLING=true
     command : "npm start"
     ports:
       - "3000:3000"
