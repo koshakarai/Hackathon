@@ -42,3 +42,12 @@ def create_user(request):
 
     user.save()
 
+
+@api_view(['POST'])
+def auth_user(request):
+    a = Users.objects.filter(email=request['email'], password=request['password'])
+    if a:
+        return Users
+    else:
+        None
+
