@@ -59,4 +59,16 @@ def auth_user(request):
         return Response('Невереный email или пароль!', status=status.HTTP_404_NOT_FOUND)
     return Response('Успех!', status=status.HTTP_200_OK)
 
- 
+
+@api_view(['POST'])
+def add_order(request):
+    user = Users.objects.get(id=request.data['id'])
+    user.order = request.data['order']
+    user.save()
+    
+
+
+
+
+
+
