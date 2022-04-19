@@ -22,7 +22,7 @@ export default class RegistrationPage  extends React.Component{
       const headers = {
         'Accept': 'application/json',
     }
-      axios.post('http://127.0.0.1:8000/api/', data, headers)
+      axios.post('http://127.0.0.1:8000/api/v1/create', data, headers)
       .then(res => {if (res.statusText == "OK") {console.log("OK!")}}).catch(err => console.log(err));
         } 
 
