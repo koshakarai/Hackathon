@@ -44,11 +44,3 @@ services:
       MYSQL_PASSWORD: 'django'
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_TCP_PORT: 3307
-    restart: always
-
-
-  
-
-  
-
-
