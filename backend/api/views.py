@@ -1,5 +1,8 @@
 from rest_framework.decorators import api_view
-from rest_framework.response import Response
+from rest_framework.response import (
+    Response,
+)
+from rest_framework import status
 from .models import (
     Users,
 )
@@ -26,28 +29,34 @@ def test_api(request):
 
 @api_view(['POST'])
 def create_user(request):
-    users = Users.objects.filter(email=request['email'])
+    print(request.data)
+    users = Users.objects.filter(email=request.data['email'])
     if users:
-        return 'Такой email уже используется.'
+        return Response('Такой email уже используется.', status=status.HTTP_400_BAD_REQUEST)
 
     user = Users(
-        name=request['name'],
-        surname=request['surname'],
-        patronymic=request['patronymic'],
-        email=request['email'],
-        company_name=request['company_name'],
-        inn=request['inn'],
-        password=request['password']
+        name=request.data['name'],
+        surname=request.data['surname'],
+        patronymic=request.data['patronymic'],
+        email=request.data['email'],
+        company_name=request.data['company_name'],
+        inn=request.data['inn'],
+        password=request.data['password']
     )
 
     user.save()
+    return Response('Регистрация успешно завершена!', status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])
 def auth_user(request):
-    a = Users.objects.filter(email=request['email'], password=request['password'])
-    if a:
-        return Users
-    else:
-        None
+    users = Users.objects.get(email=request.data['email'], password=request.data['password'])
+    print(users.id)
+    print(users.surname)
+    print(users.email)
+    print(users)
+    if not users:
+        return Response('Невереный email или пароль!', status=status.HTTP_404_NOT_FOUND)
+    return Response('Успех!', status=status.HTTP_200_OK)
 
+ 
