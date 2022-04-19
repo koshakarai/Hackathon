@@ -1,6 +1,6 @@
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from models import (
+from .models import (
     Users,
 )
 
@@ -13,10 +13,10 @@ def test_api(request):
     The test api
  """
     if request.method == 'GET':
-        data = [{"id":0, "name":"Akay"},
-        {"id":1, "name":"Ararat"},
-        {"id":2, "name":"Maxim"},
-        {"id":3, "name":"Roman"}] 
+        data = [{"id": 0, "name": "Akay"},
+                {"id": 1, "name": "Ararat"},
+                {"id": 2, "name": "Maxim"},
+                {"id": 3, "name": "Roman"}]
 
         return Response(data)
 
@@ -33,6 +33,12 @@ def create_user(request):
     user = Users(
         name=request['name'],
         surname=request['surname'],
+        patronymic=request['patronymic'],
+        email=request['email'],
+        company_name=request['company_name'],
+        inn=request['inn'],
+        password=request['password']
     )
 
     user.save()
+
