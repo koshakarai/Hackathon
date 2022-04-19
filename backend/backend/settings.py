@@ -83,16 +83,16 @@ WSGI_APPLICATION = 'backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
-#DATABASES = {
-#    'default': {
-#        'NAME': 'django_db',
-#        'ENGINE': 'django.db.backends.mysql',
-#        'USER': 'root',
-#        'PASSWORD': 'root',
-#        'HOST': 'db',
-#        'PORT': '3307',
-#    }
-#}
+DATABASES = {
+    'default': {
+        'NAME': 'django_db',
+        'ENGINE': 'django.db.backends.mysql',
+        'USER': 'root',
+        'PASSWORD': 'root',
+        'HOST': 'db',
+        'PORT': '3307',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
