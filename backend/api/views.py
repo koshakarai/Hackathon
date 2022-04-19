@@ -13,10 +13,10 @@ def test_api(request):
     The test api
  """
     if request.method == 'GET':
-        data = [{"id": 0, "name": "Akay"},
-                {"id": 1, "name": "Ararat"},
-                {"id": 2, "name": "Maxim"},
-                {"id": 3, "name": "Roman"}]
+        data = [{"id":0, "name":"Akay"},
+        {"id":1, "name":"Ararat"},
+        {"id":2, "name":"Maxim"},
+        {"id":3, "name":"Roman"}] 
 
         return Response(data)
 
