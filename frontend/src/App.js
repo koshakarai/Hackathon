@@ -1,29 +1,24 @@
-import { useState, useEffect} from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import axios from 'axios';
+
+import InfoPage from './pages/infoPage';
+import LoginPage from './pages/loginPage';
+import RegistrationPage from './pages/registrationPage';
+
 
 import './App.css';
 
 function App() {
 
-  const [team, setTeam] = useState([])
-
-  useEffect(() => {
-    axios({
-      method: "GET",
-      url: "http://127.0.0.1:8000/api/"
-    }).then(response => setTeam(response.data))
-  }, [])
-
   return (
-    <div className="App">
-      <p>Wellcome to Hackathon</p>
-      <p>'Team prometheus'</p>
+    <>
+      <Routes>
+        <Route path="/" element={<InfoPage/>}/>
+        <Route path="/login" element={<LoginPage/>}/>
+        <Route path="/registration" element={<RegistrationPage/>}/>
+      </Routes>
       
-      {team.map(t => (
-        <p key={t.id}>{t.name}</p>
-      ))}
-      
-    </div>
+    </>
   );
 }
 
