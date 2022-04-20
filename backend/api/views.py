@@ -51,13 +51,11 @@ def create_user(request):
 @api_view(['POST'])
 def auth_user(request):
     users = Users.objects.get(email=request.data['email'], password=request.data['password'])
-    print(users.id)
-    print(users.surname)
-    print(users.email)
-    print(users)
+    data = {"id": f"{users.id}"}
+
     if not users:
         return Response('Невереный email или пароль!', status=status.HTTP_404_NOT_FOUND)
-    return Response('Успех!', status=status.HTTP_200_OK)
+    return Response(data, status=status.HTTP_200_OK)
 
 
 @api_view(['POST'])

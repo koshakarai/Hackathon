@@ -1,12 +1,12 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import './Header.models.css';
 
 function Header () {
     return(
         <header>
-            <div id="logo"> РОСГОСПОСТАВКИ </div>
-            <div className="login"> <Link to="/login">вход</Link></div>
+            <div id="logo"><img src={require('../../images/logo.png') }/></div>
+            <div className="login"> <NavLink to="/login">вход</NavLink></div>
         </header>
     );
 }
