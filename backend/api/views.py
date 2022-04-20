@@ -60,11 +60,17 @@ def add_order(request):
     return Response('Заказ на закупку успешно создан', status=status.HTTP_200_OK)
 
 
-@api_view(['POST'])
-def get_order_id(request):
-    id_user = Transaction.objects.get(user_id=request.data['user_id'])
+@api_view(['GET'])
+def get_by_order_id(request):
+    tr = Transaction.objects.get(id=request.data['order_id'])
 
-    return Response(model_to_dict(id_user))
+    return Response(model_to_dict(tr))
+
+@api_view(['GET'])
+def get_orders_by_user(request, user_id):
+    orders = Transaction.objects.filter(user_id=user_id)
+
+    return Response({'orders': [model_to_dict(i) for i in orders]}, status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
