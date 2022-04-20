@@ -4,7 +4,7 @@ from rest_framework.response import (
 )
 from rest_framework import status
 from .models import (
-    Users,
+    Users, Transaction,
 )
 
 from .serializer import *
@@ -61,13 +61,19 @@ def auth_user(request):
 
 @api_view(['POST'])
 def add_order(request):
-    user = Users.objects.get(id=request.data['id'])
-    user.order = request.data['order']
-    user.save()
-    
 
+    tr = Transaction(user_id=request.data['user_id'],
+                     title=request.data['title'],
+                     amount=request.data['amount'],
+                     create_data=request.data['create_data'],
+                     exp_data=request.data['exp_data'],
+                     req_price=request.data['req_price'],
+                     currency=request.data['currency']
+                     )
 
+    tr.save()
 
+    return Response('Заказ на закупку успешно создан', status=status.HTTP_200_OK)
 
 
 
