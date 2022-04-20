@@ -1,81 +1,83 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-export default class RegistrationPage  extends React.Component{
+export default function RegistrationPage () {
 
-    
-    handleSubmit = event => {
-      event.preventDefault();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('')
+    const [inn, setInn] = useState('');
+    const [org, setOrg] = useState('');
+    const [name, setName] = useState('');
+    const [lastname, setLastname] = useState('');
+    const [patronymic, setPatronymic] = useState('');
+
+    const navigate = useNavigate();
+      const registrate=(id)=>{
+        navigate('/login');
+          }
+
+    const handleSubmit = e => {
+      e.preventDefault();
 
       const data = {
-            email: this.email,
-            surname: this.ln,
-            name: this.name,
-            patronymic: this.fn,
+            email: email,
+            surname: lastname,
+            name: name,
+            patronymic: patronymic,
 
-            company_name: this.org,
-            inn: this.inn,
-            password: this.psw,
+            company_name: org,
+            inn: inn,
+            password: password,
       }
       const headers = {
         'Accept': 'application/json',
     }
       axios.post('http://127.0.0.1:8000/api/v1/create', data, headers)
-      .then(res => {if (res.statusText == "OK") {console.log("OK!")}}).catch(err => console.log(err));
+      .then(res => {if (res.statusText == "OK") {registrate()}}).catch(err => console.log(err));
         } 
 
-    render () {
-        
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={handleSubmit}>
                     <div>
                         <label><b>Почта</b></label>
-                        <input type="text" placeholder="Enter Email" name="email" 
-                        onChange={e => this.email = e.target.value} required/>
+                        <input type="email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
                     </div>
                     
                     <div>
                         <label ><b>Фамилия</b></label>
-                        <input type="text" placeholder="Last name" name="ln" 
-                        onChange={e => this.ln = e.target.value} required/>
+                        <input type="text" id='lastname' value={lastname} onChange={(e) => setLastname(e.target.value)}/>
                     </div>
 
                     <div>
                         <label ><b>Имя</b></label>
-                        <input type="text" placeholder="First Name" name="name" 
-                        onChange={e => this.name = e.target.value} required/>
+                        <input type="text" id='name' value={name} onChange={(e) => setName(e.target.value)}/>
                     </div>
 
                     <div>
                         <label ><b>Отчество</b></label>
-                        <input type="text" placeholder="Father name" name="fn" 
-                        onChange={e => this.fn = e.target.value} required/>
+                        <input type="text" id='patronymic' value={patronymic} onChange={(e) => setPatronymic(e.target.value)}/>
                     </div>
 
                     <div>
                         <label ><b>Название организации</b></label>
-                        <input type="text" placeholder="Org name" name="org" 
-                        onChange={e => this.org = e.target.value} required/>
+                        <input type="text" id='org' value={org} onChange={(e) => setOrg(e.target.value)}/>
                     </div>
 
                     <div>
                         <label ><b>ИНН</b></label>
-                        <input type="text" placeholder="INN" name="inn" 
-                        onChange={e => this.inn = e.target.value} required/>
+                        <input type="text" id='inn' value={inn} onChange={(e) => setInn(e.target.value)}/>
                     </div>
 
                     <div>
                         <label ><b>Пароль</b></label>
-                        <input type="password" placeholder="Enter Password" name="psw" 
-                        onChange={e => this.psw = e.target.value} required/>
+                        <input type='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </div>
 
                     <div>
                         <label ><b>Пароль</b></label>
-                        <input type="password" placeholder="Repeat Password" name="pswr" 
-                        onChange={e => this.pswr = e.target.value} required/>
+                        <input type='password'/>
                     </div>
 
                     
@@ -86,7 +88,6 @@ export default class RegistrationPage  extends React.Component{
                         <p>Уже есть аккаунт? <Link to="/login">войти</Link></p>
                     </div>
                 </form>
-            </div>
-        );
-    }
+            </div>);
+
 }

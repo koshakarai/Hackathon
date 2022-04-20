@@ -1,33 +1,46 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, {useState, FormEvent} from 'react';
+import { Link, useNavigate, useParams} from 'react-router-dom';
 import axios from 'axios';
 
-export default class LoginPage  extends React.Component{
-    handleSubmit = event => {
-      event.preventDefault();
+export default function LoginPage  (){
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const {who}  = useParams()
+    
+    const [whoLogined, setWhoLogined] = useState(false)
 
+    const navigate = useNavigate();
+      const auth=(id, who)=>{
+        navigate('/' + who + '/' + id);
+          }
+    const handleSubmit = (e) => {
+      e.preventDefault();
       const data = {
-            email: this.email,
-            password: this.psw,
+            email: email,
+            password: password,
       }
+      
       const headers = {
         'Accept': 'application/json',}
       axios.post('http://127.0.0.1:8000/api/v1/auth', data, headers)
-      .then(res => {if (res.statusText == "OK") {console.log("OK!")}}).catch(err => console.log(err));} 
+      .then(res => {if (res.statusText=="OK") {auth(res.data.id, (whoLogined? "buyer":"seller"))}}).catch(err => console.log(err));} 
 
-    render () {
         return (
             <div>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <span>Поставшик</span>
+                        <label class="switch"><input type='checkbox' id="who" value={email} onChange={(e) => setWhoLogined(!whoLogined)} className='switch'/><span class="slider round"></span></label>
+                        <span>Заказчик</span>
+                    </div>
                     <div>
                         <label><b>Email</b></label>
-                        <input type="text" placeholder="Enter Email" name="email" required
-                        onChange={e => this.email = e.target.value}/>
+                        <input type="email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>
                     </div>
                     <div>
                         <label ><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="psw" required
-                        onChange={e => this.psw = e.target.value}/>
+                        <input type='password' id='password' value={password} onChange={(e) => setPassword(e.target.value)}/>
                     </div>
 
                     <button type="submit" >login</button>
@@ -38,5 +51,5 @@ export default class LoginPage  extends React.Component{
                 </form>
             </div>
         );
-    }
+    
 }
