@@ -23,6 +23,7 @@ class Transaction(models.Model):
     exp_data = models.DateTimeField()
     req_price = models.FloatField()
     currency = models.CharField(max_length=10)
+    red_line = models.BooleanField()
 
     def __str__(self):
         return self.name
