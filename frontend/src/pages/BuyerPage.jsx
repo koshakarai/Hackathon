@@ -21,6 +21,7 @@ function Buyer() {
     const handleSubmit = (e) => {
         e.preventDefault();
         const data = {
+            user_id: userID,
             title: title,
             amount: amount,
             exp_data: exp_data,
