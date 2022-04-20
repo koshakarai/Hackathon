@@ -4,7 +4,7 @@ import InfoPage from './pages/infoPage';
 import LoginPage from './pages/loginPage';
 import RegistrationPage from './pages/registrationPage';
 import Seller from './pages/SellerPage';
-import Buyer from './pages/BayerPage';
+import Buyer from './pages/BuyerPage';
 
 import './App.css';
 
