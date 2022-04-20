@@ -10,13 +10,13 @@ class Users(models.Model):
     inn = models.BigIntegerField()
     password = models.TextField()
     type = models.CharField(max_length=10)
-    
+
     def __str__(self):
         return Users
 
 
 class Transaction(models.Model):
-    users_id = models.ForeignKey('Users', on_delete=models.CASCADE)
+    user = models.ForeignKey('Users', on_delete=models.CASCADE)
     title = models.CharField(max_length=255)
     amount = models.IntegerField()
     create_data = models.DateTimeField(auto_now_add=True)
@@ -27,4 +27,3 @@ class Transaction(models.Model):
 
     def __str__(self):
         return Transaction
-

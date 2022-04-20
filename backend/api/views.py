@@ -50,7 +50,8 @@ def add_order(request):
         exp_data=request.data['exp_data'],
         req_price=request.data['req_price'],
         currency=request.data['currency'],
-        red_line=request.data['red_line']
+        red_line=request.data['red_line'],
+        user=request.data['user_id'],
     )
 
     tr.save()
