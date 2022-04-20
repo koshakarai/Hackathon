@@ -44,6 +44,7 @@ def auth_user(request):
 
 @api_view(['POST'])
 def add_order(request):
+    user = Users.objects.get(id=request.data['user_id'])
     tr = Transaction(
         title=request.data['title'],
         amount=request.data['amount'],
@@ -51,7 +52,7 @@ def add_order(request):
         req_price=request.data['req_price'],
         currency=request.data['currency'],
         red_line=request.data['red_line'],
-        user=request.data['user_id'],
+        user=user,
     )
 
     tr.save()
@@ -70,9 +71,10 @@ def get_order_id(request):
 def get_orders(request):
     all_order = Transaction.objects.all()
 
-    return Response(model_to_dict(all_order))
+    return Response({'orders': [model_to_dict(i) for i in all_order]})
 
 
 @api_view(['DELETE'])
 def delete_order(request):
-    pass
+    order = Transaction.objects.get(id=request.data['transaction_id'])
+    order.delete()
