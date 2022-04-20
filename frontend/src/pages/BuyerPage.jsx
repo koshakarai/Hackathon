@@ -23,8 +23,10 @@ function Buyer() {
             amount: amount,
             exp_data: exp_data,
             req_price: req_price,    
-        }}
-        console.log(data)
+        }
+        console.log(data);
+    }
+        
     return (
         <>
         <header>

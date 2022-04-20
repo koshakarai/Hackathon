@@ -65,7 +65,6 @@ def add_order(request):
     tr = Transaction(
                      title=request.data['title'],
                      amount=request.data['amount'],
-                     create_data=request.data['create_data'],
                      exp_data=request.data['exp_data'],
                      req_price=request.data['req_price'],
                      currency=request.data['currency']
