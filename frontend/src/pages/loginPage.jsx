@@ -1,14 +1,14 @@
-import React, {useState, FormEvent} from 'react';
-import { Link, useNavigate, useParams} from 'react-router-dom';
+import React, {useState} from 'react';
+import { Link, useNavigate} from 'react-router-dom';
 import axios from 'axios';
 
 export default function LoginPage  (){
     
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const {who}  = useParams()
+
     
-    const [whoLogined, setWhoLogined] = useState(false)
+    const [type, setType] = useState("seller")
 
     const navigate = useNavigate();
       const auth=(id, who)=>{
@@ -19,19 +19,20 @@ export default function LoginPage  (){
       const data = {
             email: email,
             password: password,
+            type: type,
       }
       
       const headers = {
         'Accept': 'application/json',}
       axios.post('http://127.0.0.1:8000/api/v1/auth', data, headers)
-      .then(res => {if (res.statusText=="OK") {auth(res.data.id, (whoLogined? "buyer":"seller"))}}).catch(err => console.log(err));} 
+      .then(res => {if (res.statusText=="OK") {auth(res.data.id, type)}}).catch(err => console.log(err));} 
 
         return (
             <div>
                 <form onSubmit={handleSubmit}>
                     <div>
                         <span>Поставшик</span>
-                        <label class="switch"><input type='checkbox' id="who" value={email} onChange={(e) => setWhoLogined(!whoLogined)} className='switch'/><span class="slider round"></span></label>
+                        <label className="switch"><input type='checkbox' id="who" onChange={(e) => setType((type == "seller")? "buyer":"seller")}/><span className="slider round"></span></label>
                         <span>Заказчик</span>
                     </div>
                     <div>
