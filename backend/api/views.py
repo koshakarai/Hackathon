@@ -3,6 +3,7 @@ from rest_framework.response import (
     Response,
 )
 from rest_framework import status
+from django.forms.models import model_to_dict
 from .models import (
     Users, Transaction,
 )
@@ -10,26 +11,8 @@ from .models import (
 from .serializer import *
 
 
-@api_view(['GET', 'POST'])
-def test_api(request):
-    """
-    The test api
- """
-    if request.method == 'GET':
-        data = [{"id": 0, "name": "Akay"},
-                {"id": 1, "name": "Ararat"},
-                {"id": 2, "name": "Maxim"},
-                {"id": 3, "name": "Roman"}]
-
-        return Response(data)
-
-    elif request.method == 'POST':
-        return Response({"hi": "hi"})
-
-
 @api_view(['POST'])
 def create_user(request):
-    print(request.data)
     users = Users.objects.filter(email=request.data['email'])
     if users:
         return Response('Такой email уже используется.', status=status.HTTP_400_BAD_REQUEST)
@@ -51,7 +34,6 @@ def create_user(request):
 
 @api_view(['POST'])
 def auth_user(request):
-    print(request.data)
     users = Users.objects.get(email=request.data['email'], password=request.data['password'], type=request.data['type'])
     data = {"id": f"{users.id}"}
 
@@ -80,14 +62,14 @@ def add_order(request):
 def get_order_id(request):
     id_user = Transaction.objects.get(user_id=request.data['user_id'])
 
-    return Response(id_user.dict())
+    return Response(model_to_dict(id_user))
 
 
 @api_view(['GET'])
 def get_orders(request):
     all_order = Transaction.objects.all()
 
-    return Response(all_order.dict())
+    return Response(model_to_dict(all_order))
 
 
 @api_view(['DELETE'])
