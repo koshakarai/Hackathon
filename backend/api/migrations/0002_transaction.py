@@ -5,7 +5,6 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ('api', '0001_initial'),
     ]
@@ -21,7 +20,8 @@ class Migration(migrations.Migration):
                 ('exp_data', models.DateTimeField()),
                 ('req_price', models.FloatField()),
                 ('currency', models.CharField(max_length=10)),
-                ('users_id', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.users')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='api.users')),
+                ('red_line', models.BooleanField())
             ],
         ),
     ]
