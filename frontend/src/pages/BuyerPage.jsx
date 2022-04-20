@@ -1,6 +1,7 @@
 
 import { useParams } from 'react-router-dom'
 import { useState } from 'react';
+import axios from 'axios';
 import './sell-buy.css';
 
 function Buyer() {
@@ -26,8 +27,10 @@ function Buyer() {
             req_price: req_price,   
             red_line: red_line, 
         }
-        console.log(data);
-    }
+        const headers = {
+            'Accept': 'application/json',}
+          axios.post('http://127.0.0.1:8000/api/v1/add_order', data, headers)
+          .then(res => {if (res.statusText=="OK") {console.log("ok")}}).catch(err => console.log(err));} 
         
     return (
         <>
