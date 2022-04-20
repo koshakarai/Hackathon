@@ -61,7 +61,7 @@ def auth_user(request):
 @api_view(['POST'])
 def add_order(request):
 
-    tr = Transaction(user_id=request.data['user_id'],
+    tr = Transaction(
                      title=request.data['title'],
                      amount=request.data['amount'],
                      create_data=request.data['create_data'],
@@ -75,4 +75,19 @@ def add_order(request):
     return Response('Заказ на закупку успешно создан', status=status.HTTP_200_OK)
 
 
+@api_view(['POST'])
+def get_order_id(request):
+    id_user = Transaction.objects.get(user_id=request.data['user_id'])
+
+    return Response(id_user.dict())
+
+
+@api_view(['GET'])
+def get_orders(request):
+    pass
+
+
+@api_view(['DELETE'])
+def delete_order(request):
+    pass
 

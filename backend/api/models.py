@@ -12,7 +12,7 @@ class Users(models.Model):
     type = models.CharField(max_length=10)
     
     def __str__(self):
-        return self.name
+        return Users
 
 
 class Transaction(models.Model):
@@ -26,5 +26,5 @@ class Transaction(models.Model):
     red_line = models.BooleanField()
 
     def __str__(self):
-        return self.name
+        return Transaction
 
