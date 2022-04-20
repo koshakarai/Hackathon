@@ -51,6 +51,7 @@ def create_user(request):
 
 @api_view(['POST'])
 def auth_user(request):
+    print(request.data)
     users = Users.objects.get(email=request.data['email'], password=request.data['password'], type=request.data['type'])
     data = {"id": f"{users.id}"}
 
@@ -61,14 +62,14 @@ def auth_user(request):
 
 @api_view(['POST'])
 def add_order(request):
-
     tr = Transaction(
-                     title=request.data['title'],
-                     amount=request.data['amount'],
-                     exp_data=request.data['exp_data'],
-                     req_price=request.data['req_price'],
-                     currency=request.data['currency']
-                     )
+        title=request.data['title'],
+        amount=request.data['amount'],
+        exp_data=request.data['exp_data'],
+        req_price=request.data['req_price'],
+        currency=request.data['currency'],
+        red_line=request.data['red_line']
+    )
 
     tr.save()
 
@@ -92,4 +93,3 @@ def get_orders(request):
 @api_view(['DELETE'])
 def delete_order(request):
     pass
-

@@ -9,8 +9,7 @@ services:
       context: .
       dockerfile: backend/Dockerfile
     command : >
-      sh -c "python backend/manage.py makemigrations &&
-             python backend/manage.py migrate &&
+      sh -c "python backend/manage.py migrate --noinput &&
              python backend/manage.py runserver 0.0.0.0:8000"
     ports:  
       - "8000:8000"
