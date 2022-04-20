@@ -85,7 +85,9 @@ def get_order_id(request):
 
 @api_view(['GET'])
 def get_orders(request):
-    pass
+    all_order = Transaction.objects.all()
+
+    return Response(all_order.dict())
 
 
 @api_view(['DELETE'])
