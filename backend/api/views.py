@@ -66,6 +66,7 @@ def get_by_order_id(request):
 
     return Response(model_to_dict(tr))
 
+
 @api_view(['GET'])
 def get_orders_by_user(request, user_id):
     orders = Transaction.objects.filter(user_id=user_id)
@@ -84,3 +85,12 @@ def get_orders(request):
 def delete_order(request):
     order = Transaction.objects.get(id=request.data['transaction_id'])
     order.delete()
+
+
+@api_view(['GET'])
+def get_info(request):
+    all_user = Users.object.filter(user_id=user_id)
+
+    return Response({'users': [model_to_dict(i) for i in all_user]})
+
+
