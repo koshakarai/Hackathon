@@ -11,7 +11,9 @@ export default function RegistrationPage () {
     const [name, setName] = useState('');
     const [lastname, setLastname] = useState('');
     const [patronymic, setPatronymic] = useState('');
+    const [type, setType] = useState("seller")
 
+    
     const navigate = useNavigate();
       const registrate=(id)=>{
         navigate('/login');
@@ -29,6 +31,7 @@ export default function RegistrationPage () {
             company_name: org,
             inn: inn,
             password: password,
+            type: type,
       }
       const headers = {
         'Accept': 'application/json',
@@ -40,6 +43,11 @@ export default function RegistrationPage () {
         return (
             <div>
                 <form onSubmit={handleSubmit}>
+                    <div>
+                        <span>Поставшик</span>
+                        <label class="switch"><input type='checkbox' id="who" onChange={(e) => setType((type == "seller")? "buyer":"seller")} className='switch'/><span class="slider round"></span></label>
+                        <span>Заказчик</span>
+                    </div>
                     <div>
                         <label><b>Почта</b></label>
                         <input type="email" id='email' value={email} onChange={(e) => setEmail(e.target.value)}/>

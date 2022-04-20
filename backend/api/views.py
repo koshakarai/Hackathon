@@ -41,7 +41,8 @@ def create_user(request):
         email=request.data['email'],
         company_name=request.data['company_name'],
         inn=request.data['inn'],
-        password=request.data['password']
+        password=request.data['password'],
+        type=request.data['type']
     )
 
     user.save()
@@ -50,7 +51,7 @@ def create_user(request):
 
 @api_view(['POST'])
 def auth_user(request):
-    users = Users.objects.get(email=request.data['email'], password=request.data['password'])
+    users = Users.objects.get(email=request.data['email'], password=request.data['password'], type=request.data['type'])
     data = {"id": f"{users.id}"}
 
     if not users:
