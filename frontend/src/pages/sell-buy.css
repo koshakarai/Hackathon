@@ -22,3 +22,14 @@ a {
 .login a:visited {color:aliceblue;}
 .login a:link {color:aliceblue;}
 .login a:hover {color:aliceblue;}
+
+.Buyer-cont {display: flex; height: 1000px; }
+
+.add_aria { 
+    width: 25%;
+
+    background-color: #808080;}
+.orders { 
+    width: 75%;
+    
+    background-color: #ccc;}
