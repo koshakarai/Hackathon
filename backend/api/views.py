@@ -97,9 +97,9 @@ def get_info(request):
 
 
 @api_view(['POST'])
-def add_accept(request, tr_id, user_id):
-    tr = Transaction.objects.get(id=tr_id)
-    user = Users.objects.get(user_id=user_id)
+def add_accept(request):
+    tr = Transaction.objects.get(id=request.data['tr_id'])
+    user = Users.objects.get(user_id=request.data['user_id'])
     user.accept_order += f'{tr.id};'
     user.save()
 
