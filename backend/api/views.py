@@ -97,16 +97,19 @@ def get_info(request):
 
 
 @api_view(['POST'])
-def add_accept(request):
-    user = Users.objects.get(user_id=request['id'])
-    accept_orders=request.data['transaction_id']
+def add_accept(request, tr_id, user_id):
+    tr = Transaction.objects.get(id=tr_id)
+    user = Users.objects.get(user_id=user_id)
+    user.accep_order += f'{tr.id};'
     user.save()
 
-    return Response(status=status.HTTP_200_OK)
+    return Response(model_to_dict(user), status=status.HTTP_200_OK)
 
 
 @api_view(['GET'])
 def get_accept(request, user_id):
-    accept = Users.objects.get(user_id=user_id)
-
-    return Response({'accept': [model_to_dict(i) for i in accept]}, status=status.HTTP_200_OK)
+    user = Users.objects.get(user_id=user_id)
+    orders = []
+    for i in user.accep_order.split(';'):
+        orders.append(Transaction.objects.get(id=int(i)))
+    return Response({'accept': [model_to_dict(i) for i in orders]}, status=status.HTTP_200_OK)
