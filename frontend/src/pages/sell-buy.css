@@ -1,4 +1,4 @@
-span {padding-right: 30px; font-size: 20px;}
+span {padding-right: 30px; font-size: 20px; padding-left: 40px;}
 
-.rdl { border: solid ;border-color: red}
-.grl { border: solid ;border-color: rgb(82, 82, 82)}
+.rdl {vertical-align: middle; border: solid ;border-color: red}
+.grl {vertical-align: middle; border: solid ;border-color: rgb(82, 82, 82)}
