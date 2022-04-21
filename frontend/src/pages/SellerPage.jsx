@@ -36,9 +36,16 @@ function Seller(){
       </Button>
         </header>
 
-            {orders?.orders.map(o => 
-            
-            <p>{o.title}</p>)}
+        {orders?.orders.map(o => 
+                <div className={o.red_line? "rdl":"grl"}>
+                    
+                    <span >№{o.id}</span>
+                    <span>{o.title}</span>
+                    <span>{o.amount}</span>
+                    <span>{o.req_price}{o.currency}</span>
+                    <span>{(o.red_line)? "экстренно":""}</span>
+                </div>
+                )}
         </>
         
     );
