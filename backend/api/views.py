@@ -81,6 +81,7 @@ def get_orders(request):
 
 
 @api_view(['DELETE'])
-def delete_order(request):
-    order = Transaction.objects.get(id=request.data['transaction_id'])
+def delete_order(request, pk):
+    order = Transaction.objects.get(id=pk)
     order.delete()
+    return Response(status=status.HTTP_200_OK)

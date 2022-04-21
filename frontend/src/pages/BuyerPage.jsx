@@ -1,79 +1,77 @@
 
-import { useParams } from 'react-router-dom'
-import { useState } from 'react';
+import { useParams, useNavigate } from 'react-router-dom'
+import { useEffect, useState, componentDidMount } from 'react';
+import Button from '@mui/material/Button';
+import AddOrder from '../components/add_order'
 import axios from 'axios';
 import './sell-buy.css';
 
 function Buyer() {
 
-    const [isVisible, setIsVisible] = useState(false)
+    const {id} = useParams()
+    const navigate = useNavigate()
+    if (!localStorage.auth || localStorage.auth != id){
+        navigate('/')
+    }
 
-    const {userID} = useParams()
 
-    const [title, setTitle] = useState()
-    const [amount, setAmount] = useState()
-    const [exp_data, setExp_data] = useState()
-    const [req_price, setReq_price] = useState()
-    const [red_line, setRed_line] = useState(false)
+    const [orders, setOrders] = useState()
 
-    const [currency, setCurrency] = useState()
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        const data = {
-            user_id: userID,
-            title: title,
-            amount: amount,
-            exp_data: exp_data,
-            req_price: req_price,   
-            red_line: red_line, 
-        }
-        const headers = {
-            'Accept': 'application/json',}
-          axios.post('http://127.0.0.1:8000/api/v1/add_order', data, headers)
-          .then(res => {if (res.statusText=="OK") {console.log("ok")}}).catch(err => console.log(err));} 
+    const del = (data) => {
+        axios.delete('http://127.0.0.1:8000/api/v1/delete_order/' + data)}
+        setTimeout(() => {}, 200);
+        axios.get('http://127.0.0.1:8000/api/v1/get_orders_by_user/'+ id).then(res => {setOrders(res.data)})
         
+    
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/api/v1/get_orders_by_user/'+ id).then(res => {setOrders(res.data)});
+      }, []);
+
+    const unlogin = () =>{
+        localStorage.auth=0
+        navigate('/')
+    }
+
     return (
         <>
         <header>
             <div id="logo"><img src={require('../images/logo.png') }/></div>
-        </header>
-        <div className='Buyer-cont'>
-            <div className='add_aria'>
-                <button type='button' onClick={(e) => setIsVisible(!isVisible)}>add</button>
-                <div className={isVisible? "form-vis":"form-invis"}>
-                    <form onSubmit={handleSubmit}>
-                        <div>
-                            <label ><b>Наименование товара/услуги</b></label>
-                            <input type="text" value={title} onChange={(e) => setTitle(e.target.value)}/>
-                        </div>
-                        <div>
-                            <label ><b>Количество (если услуга поставить прочерк)</b></label>
-                            <input type="text" value={amount} onChange={(e) => setAmount(e.target.value)}/>
-                        </div>
-                        <div>
-                            <label ><b>Срок актуальности заказа</b></label>
-                            <input type="text" value={exp_data} onChange={(e) => setExp_data(e.target.value)}/>
-                        </div>
-                        <div>
-                            <label ><b>Запрашиваемая цена</b></label>
-                            <input type="text" value={req_price} onChange={(e) => setReq_price(e.target.value)}/>
-                        </div>
-                        <div>
-                            <label ><b>Валюта</b></label>
-                            <input type="text" value={currency} onChange={(e) => setCurrency(e.target.value)}/>
-                        </div>
-                        <div>
-                            <label ><b>Экстренный Заказ</b></label>
-                            <input type='checkbox' onChange={(e) => setRed_line(!red_line)}/>
-                        </div>
-                        <button type="submit" >Сделать Запрос</button>
-                    </form>
+            <Button color="secondary" sx={{
+            marginTop: '2.5%',
+              width: 300,
+              height: 70,
+              fontSize: 20,
+              color: '#00B3E7',
 
+            }}   onClick={unlogin}>
+        Выйти
+      </Button>
+      
+        </header>
+        <AddOrder />
+        
+                
+               
+                {orders?.orders.map(o => 
+                <div>
+                    <Button sx={{
+              paddingBottom: 1.5     ,
+              width: 45,
+              height: 45,
+              fontSize: 35,
+              color: '#f23f64',
+
+            }} onClick={(e) => del(o.id)}>-</Button>
+                    <span >№{o.id}</span>
+                    <span>Тема заказа: {o.title}</span>
+                    <span>{o.title}</span>
+                    <span>{o.title}</span>
+                    <span>{o.title}</span>
+                    <span>{o.title}</span>
                 </div>
-            </div>
-            <div className='orders'>asd</div>
-        </div>
+                )}
+            
+        
         
         </>
     );

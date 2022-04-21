@@ -4,69 +4,36 @@
     max-width: 1200px;
 }
 
+.bs-cont{ max-width: 1000px; margin: 0 auto; display: block;}
+
 .seller {display: flex; padding: 0 auto;}
 .buyer {display: flex;  padding: 0 auto;}
 .buyer  img {padding: 10px; }
 .seller img {padding: 10px; }
+
 .bs-ic  {background: #def1ff;border-radius: 50%;}
-.bs-prc {width: 400px;}
-.bs-tc {display:flex; max-width: 400px; flex-direction: column; padding-left: 10px;}
+.bs-prc {width: 724px; height: 276; padding-top:15%}
+.bs-tc {display:flex; max-width: 724px; padding-left: 10px;}
 .we {font-size: 40px; max-width: 1200px; margin: 0 auto;}
 
-.slider {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  /* The switch - the box around the slider */
-.switch {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 34px;
-  }
+.reg {min-width: 1000px;
+      height: 50vh;
+    padding: auto;}
+
   
-  /* Hide default HTML checkbox */
-  .switch input {display:none;}
-  
-  /* The slider */
-  .slider:before {
-    position: absolute;
-    content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
-    background-color: white;
-    -webkit-transition: .4s;
-    transition: .4s;
-  }
-  
-  input:checked + .slider {
-    background-color: #ccc;
-  }
-  
-  input:focus + .slider {
-    box-shadow: 0 0 1px #ccc;
-  }
-  
-  input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
-  }
-  
-  /* Rounded sliders */
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
+.good {
+  background-image: url('../images/kisspng-computer-icons-contract-license-license-5ac18856777229.8775932315226327904893.png');
+  max-width: 1000px;
+  margin: 0 auto;
+  height: 700px;
+  background-repeat: no-repeat;
+  text-align: right;
+} 
+.parallax { background-image: 
+  url('../images/sclad.jpg'); 
+  min-height: 500px;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
