@@ -10,6 +10,7 @@ class Users(models.Model):
     inn = models.BigIntegerField()
     password = models.TextField()
     type = models.CharField(max_length=10)
+    accept_orders = models.ForeignKey('Transaction', on_delete=models.CASCADE)
 
     def __str__(self):
         return Users

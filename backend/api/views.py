@@ -88,8 +88,25 @@ def delete_order(request, pk):
 
     return Response(status=status.HTTP_200_OK)
 
+
 @api_view(['GET'])
 def get_info(request):
     all_user = Users.object.filter(user_id=user_id)
 
     return Response({'users': [model_to_dict(i) for i in all_user]})
+
+
+@api_view(['POST'])
+def add_accept(request):
+    user = Users.objects.get(user_id=request['id'])
+    accept_orders=request.data['transaction_id']
+    user.save()
+
+    return Response(status=status.HTTP_200_OK)
+
+
+@api_view(['GET'])
+def get_accept(request, user_id):
+    accept = Users.objects.get(user_id=user_id)
+
+    return Response({'accept': [model_to_dict(i) for i in accept]}, status=status.HTTP_200_OK)
