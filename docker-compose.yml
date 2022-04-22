@@ -44,3 +44,17 @@ services:
       MYSQL_PASSWORD: 'django'
       MYSQL_ROOT_PASSWORD: 'root'
       MYSQL_TCP_PORT: 3307
+  chat:
+    restart: always
+    container_name: chat
+    build:
+      context: .
+      dockerfile: chat/Dockerfile
+    command: python chat/chat.py
+    ports:
+      - "8080:8080"
+    volumes:
+      - .:/app/api/
+    depends_on:
+      - db
+      - frontend
