@@ -15,8 +15,14 @@ function Seller(){
         localStorage.auth=0
         navigate('/')
     }
+    const [acceptes, setAcceptes] = useState()
     const [orders, setOrders] = useState()
-    
+    const handleTake = (data) => {
+        axios.post('http://127.0.0.1:8000/api/v1/add_accept', data)
+    }
+    useEffect(() => {
+        axios.get('http://127.0.0.1:8000/api/v1/get_accept/' + id).then(res => {setAcceptes(res.data)});
+      }, []);
     useEffect(() => {
         axios.get('http://127.0.0.1:8000/api/v1/get_orders').then(res => {setOrders(res.data)});
       }, []);
@@ -35,10 +41,21 @@ function Seller(){
         Выйти
       </Button>
         </header>
-
+        {console.log(orders)}
         {orders?.orders.map(o => 
                 <div className={o.red_line? "rdl":"grl"}>
-                    
+                                
+                        <Button  sx={{
+                            paddingLeft: 5,
+                            paddinBottom: 5,
+                           width: 45,
+                           height: 45,
+                           fontSize: 20,
+                           color: '#E7B300',
+
+                        }} onClick={(e) => {handleTake({transaction_id:o.id, id:id})}}>
+                     [ВЗЯТЬ]
+                    </Button>
                     <span >№{o.id}</span>
                     <span>{o.title}</span>
                     <span>{o.amount}</span>

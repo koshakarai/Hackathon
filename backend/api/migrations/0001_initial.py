@@ -23,6 +23,7 @@ class Migration(migrations.Migration):
                 ('inn', models.BigIntegerField()),
                 ('password', models.TextField()),
                 ('type', models.CharField(max_length=10)),
+                ('accept_orders', models.TextField()),
             ],
         ),
     ]
